@@ -4,12 +4,13 @@ import { CommonModule, CurrencyPipe } from '@angular/common';
 import { Food } from '../shared/models/Food';
 import { ActivatedRoute } from '@angular/router';
 import { SearchComponent } from "../search/search.component";
+import { TagsComponent } from "../tags/tags.component";
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, CurrencyPipe, SearchComponent],
+  imports: [CommonModule, CurrencyPipe, SearchComponent, TagsComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -24,8 +25,10 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       if (params['searchTerm']) {
-        this.foods = this.foodService.getAll().filter(food => food.name.toLowerCase()
-          .includes(params['searchTerm'].toLowerCase()))
+        this.foods = this.foodService.getAllFoodBySearchTerm(params['searchTerm']);
+      }
+      else if (params['tag']) {
+        this.foods = this.foodService.getFoodsByTagName(params['tag']);
       }
       else this.foods = this.foodService.getAll();
     })
