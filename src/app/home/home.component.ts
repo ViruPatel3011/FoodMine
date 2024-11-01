@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FoodService } from '../services/food/food.service';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { Food } from '../shared/models/Food';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { SearchComponent } from "../search/search.component";
 import { TagsComponent } from "../tags/tags.component";
 
@@ -10,7 +10,7 @@ import { TagsComponent } from "../tags/tags.component";
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, CurrencyPipe, SearchComponent, TagsComponent],
+  imports: [CommonModule, CurrencyPipe, SearchComponent, TagsComponent, RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
